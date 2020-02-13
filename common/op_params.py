@@ -28,8 +28,9 @@ class opParams:
   def __init__(self):
     self.default_params = {'camera_offset': {'default': 0.00, 'allowed_types': [float, int], 'description': 'Your camera offset to use in lane_planner.py', 'live': True},  # float and int is important
                            'steeringRatio': {'default':  13., 'allowed_types': [float, int], 'description': 'Steering Ratio', 'live': True},
-                           'lat_P': {'default':  0.3, 'allowed_types': [float, int], 'description': 'Lat tuning P', 'live': True},
-                           'lat_I': {'default':  0.05, 'allowed_types': [float, int], 'description': 'Lat tuning I', 'live': True},
+                           'lat_kp': {'default':  0.3, 'allowed_types': [float, int], 'description': 'Lat tuning P', 'live': True},
+                           'lat_ki': {'default':  0.05, 'allowed_types': [float, int], 'description': 'Lat tuning I', 'live': True},
+                           'lat_kf': {'default':  0.05, 'allowed_types': [float, int], 'description': 'Lat tuning I', 'live': True},
                            'reset_integral': {'default': False, 'allowed_types': [bool], 'description': 'This resets integral whenever the longitudinal PID error crosses or is zero.\nShould help it recover from overshoot quicker', 'live': False},
                            'long_ki': {'default': 0.12, 'allowed_types': [float, int], 'live': True},
                            'long_kp': {'default': 0.5, 'allowed_types': [float, int], 'live': True},
