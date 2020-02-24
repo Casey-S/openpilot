@@ -3,12 +3,13 @@ from selfdrive.controls.lib.drive_helpers import get_steer_max
 from common.numpy_fast import clip
 from common.realtime import DT_CTRL
 from cereal import log
+from common.op_params import opParams
 
 
 class LatControlLQR():
   def __init__(self, CP):
-    self.scale = CP.lateralTuning.lqr.scale
-    self.ki = CP.lateralTuning.lqr.ki
+    self.scale = self.op_params.get('lqr_scale')
+    self.ki = self.op_params.get('lqr_kpi')
 
     self.A = np.array(CP.lateralTuning.lqr.a).reshape((2,2))
     self.B = np.array(CP.lateralTuning.lqr.b).reshape((2,1))
@@ -45,6 +46,9 @@ class LatControlLQR():
 
   def update(self, active, v_ego, angle_steers, angle_steers_rate, eps_torque, steer_override, rate_limited, CP, path_plan):
     lqr_log = log.ControlsState.LateralLQRState.new_message()
+    
+    self.scale = self.op_params.get('lqr_scale')
+    self.ki = self.op_params.get('lqr_kpi')
 
     steers_max = get_steer_max(CP, v_ego)
     torque_scale = (0.45 + v_ego / 60.0)**2  # Scale actuator model with speed
