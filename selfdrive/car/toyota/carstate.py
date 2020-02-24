@@ -10,7 +10,7 @@ def get_can_parser(CP):
 
   signals = [
     # sig_name, sig_address, default
-    ("STEER_ANGLE", "STEER_ANGLE_SENSOR", 0),
+    #("STEER_ANGLE", "STEER_ANGLE_SENSOR", 0),
     ("GEAR", "GEAR_PACKET", 0),
     ("BRAKE_PRESSED", "BRAKE_MODULE", 0),
     ("GAS_PEDAL", "GAS_PEDAL", 0),
@@ -41,7 +41,7 @@ def get_can_parser(CP):
     ("BRAKE_MODULE", 40),
     ("GAS_PEDAL", 33),
     ("WHEEL_SPEEDS", 80),
-    ("STEER_ANGLE_SENSOR", 80),
+    #("STEER_ANGLE_SENSOR", 80),
     ("PCM_CRUISE", 33),
     ("STEER_TORQUE_SENSOR", 50),
     ("EPS_STATUS", 25),
