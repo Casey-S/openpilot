@@ -295,10 +295,10 @@ class CarInterface(CarInterfaceBase):
       ret.lateralTuning.lqr.k = [-110.73572306, 451.22718255]
       ret.lateralTuning.lqr.l = [0.3233671, 0.3185757]
       ret.lateralTuning.lqr.dcGain = 0.002237852961363602
-      ret.enableGasInterceptor = True
 
     ret.steerRateCost = 1.
     ret.centerToFront = ret.wheelbase * 0.44
+    ret.enableGasInterceptor = True
 
     # TODO: get actual value, for now starting with reasonable value for
     # civic and scaling by mass and wheelbase
