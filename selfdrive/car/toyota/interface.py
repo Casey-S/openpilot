@@ -298,7 +298,6 @@ class CarInterface(CarInterfaceBase):
 
     ret.steerRateCost = 1.
     ret.centerToFront = ret.wheelbase * 0.44
-    ret.enableGasInterceptor = True
 
     # TODO: get actual value, for now starting with reasonable value for
     # civic and scaling by mass and wheelbase
@@ -350,6 +349,7 @@ class CarInterface(CarInterfaceBase):
     ret = car.CarState.new_message()
 
     ret.canValid = True #self.cp.can_valid and self.cp_cam.can_valid
+    ret.enableGasInterceptor = True
 
     # speeds
     ret.vEgo = self.CS.v_ego
