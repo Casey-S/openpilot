@@ -54,7 +54,7 @@ class CarInterface(CarInterfaceBase):
     ret.steerActuatorDelay = 0.12  # Default delay, Prius has larger delay
     ret.steerLimitTimer = 0.4
 
-    ret.enableGasInterceptor = True #0x201 in fingerprint[0]
+    ret.enableGasInterceptor = 0x201 in fingerprint[0]
     ret.longitudinalTuning.deadzoneBP = [0., 9.]
     ret.longitudinalTuning.deadzoneV = [0., .15]
     ret.longitudinalTuning.kpBP = [0., 5., 35.]
@@ -73,7 +73,7 @@ class CarInterface(CarInterfaceBase):
       ret.longitudinalTuning.kpV = [3.6, 2.4, 1.5]
       ret.longitudinalTuning.kiV = [0.54, 0.36]
 
-    if candidate not in [CAR.PRIUS, CAR.RAV4, CAR.RAV4H, CAR.COROLLA]:  # These cars use LQR/INDI
+    if candidate not in [CAR.PRIUS, CAR.RAV4, CAR.RAV4H, CAR.COROLLA, CAR.OLD_CAR]:  # These cars use LQR/INDI
       ret.lateralTuning.init('pid')
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
 
@@ -275,11 +275,27 @@ class CarInterface(CarInterfaceBase):
       stop_and_go = True
       ret.safetyParam = 100
       ret.wheelbase = 2.455
-      ret.steerRatio = 13.0
+      ret.steerRatio = 12.0
       tire_stiffness_factor = 0.444
       ret.mass = 6200.0
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.3], [0.05]]
-      ret.lateralTuning.pid.kf = 0.00003 # full torque for 20 deg at 80mph means 0.00007818594
+      if ret.enableGasInterceptor:
+        ret.longitudinalTuning.kpV = [(1.2 * 0.9) + (3.6 * 0.1), (0.8 * 0.5) + (2.4 * 0.5), (0.5 * 0.24) + (1.5 * 0.76)]
+        ret.longitudinalTuning.kiV = [(0.18 * 0.9) + (0.54 * 0.1), (0.12 * 0.2125) + (0.36 * 0.7875)]
+        ret.longitudinalTuning.kpV = [1.0, 0.66, 0.42]  # braking tune
+        ret.longitudinalTuning.kiV = [0.135, 0.09]
+
+      ret.lateralTuning.init('lqr')
+
+      ret.lateralTuning.lqr.scale = 1500.0
+      ret.lateralTuning.lqr.ki = 0.05
+
+      ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
+      ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
+      ret.lateralTuning.lqr.c = [1., 0.]
+      ret.lateralTuning.lqr.k = [-110.73572306, 451.22718255]
+      ret.lateralTuning.lqr.l = [0.3233671, 0.3185757]
+      ret.lateralTuning.lqr.dcGain = 0.002237852961363602
+      ret.enableGasInterceptor = True
 
     ret.steerRateCost = 1.
     ret.centerToFront = ret.wheelbase * 0.44
