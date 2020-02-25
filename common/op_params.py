@@ -59,7 +59,9 @@ class opParams:
                            'reset_integral': {'default': False, 'allowed_types': [bool], 'description': 'This resets integral whenever the longitudinal PID error crosses or is zero.\nShould help it recover from overshoot quicker', 'live': False},
                            'long_ki': {'default': 0.12, 'allowed_types': [float, int], 'live': True},
                            'long_kp': {'default': 0.5, 'allowed_types': [float, int], 'live': True},
-                           'long_kf': {'default': 1., 'allowed_types': [float, int], 'live': True}}
+                           'long_kf': {'default': 1., 'allowed_types': [float, int], 'live': True},
+                           'lqr_scale': {'default': 1500., 'allowed_types': [float, int], 'live': True},
+                           'lqr_ki': {'default': 0.05, 'allowed_types': [float, int], 'live': True},}
 
     self.params = {}
     self.params_file = "/data/op_params.json"
