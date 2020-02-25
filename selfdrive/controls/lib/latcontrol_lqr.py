@@ -9,7 +9,7 @@ from common.op_params import opParams
 class LatControlLQR():
   def __init__(self, CP):
     self.scale = self.op_params.get('lqr_scale')
-    self.ki = self.op_params.get('lqr_kpi')
+    self.ki = self.op_params.get('lqr_ki')
 
     self.A = np.array(CP.lateralTuning.lqr.a).reshape((2,2))
     self.B = np.array(CP.lateralTuning.lqr.b).reshape((2,1))
@@ -49,7 +49,7 @@ class LatControlLQR():
     lqr_log = log.ControlsState.LateralLQRState.new_message()
     
     self.scale = self.op_params.get('lqr_scale')
-    self.ki = self.op_params.get('lqr_kpi')
+    self.ki = self.op_params.get('lqr_ki')
 
     steers_max = get_steer_max(CP, v_ego)
     torque_scale = (0.45 + v_ego / 60.0)**2  # Scale actuator model with speed
