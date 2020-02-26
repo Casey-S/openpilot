@@ -8,6 +8,7 @@ from common.op_params import opParams
 
 class LatControlLQR():
   def __init__(self, CP):
+    self.op_params = opParams()
     self.scale = self.op_params.get('lqr_scale')
     self.ki = self.op_params.get('lqr_ki')
 
@@ -24,7 +25,6 @@ class LatControlLQR():
 
     self.sat_count_rate = 1.0 * DT_CTRL
     self.sat_limit = CP.steerLimitTimer
-    self.op_params = opParams()
 
     self.reset()
 
