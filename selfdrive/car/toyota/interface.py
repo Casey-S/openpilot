@@ -275,22 +275,13 @@ class CarInterface(CarInterfaceBase):
       
     elif candidate == CAR.OLD_CAR:
       stop_and_go = True
-      ret.safetyParam = 100
-      ret.wheelbase = 2.455
-      ret.steerRatio = 12.5
-      tire_stiffness_factor = 0.444
-      ret.mass = 6200.0
-      ret.lateralTuning.init('lqr')
-
-      ret.lateralTuning.lqr.scale = 1500.0
-      ret.lateralTuning.lqr.ki = 0.05
-
-      ret.lateralTuning.lqr.a = [0., 1., -0.22619643, 1.21822268]
-      ret.lateralTuning.lqr.b = [-1.92006585e-04, 3.95603032e-05]
-      ret.lateralTuning.lqr.c = [1., 0.]
-      ret.lateralTuning.lqr.k = [-110.73572306, 451.22718255]
-      ret.lateralTuning.lqr.l = [0.3233671, 0.3185757]
-      ret.lateralTuning.lqr.dcGain = 0.002237852961363602
+      ret.safetyParam = 73
+      ret.wheelbase = 2.66
+      ret.steerRatio = 14.7
+      tire_stiffness_factor = 0.444 # not optimized yet
+      ret.mass = 4070 * CV.LB_TO_KG + STD_CARGO_KG
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.6], [0.1]]
+      ret.lateralTuning.pid.kf = 0.00006
 
     ret.steerRateCost = 1.
     ret.centerToFront = ret.wheelbase * 0.44
