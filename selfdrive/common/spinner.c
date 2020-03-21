@@ -176,7 +176,7 @@ int spin(int argc, char** argv) {
     }
 
     nvgEndFrame(vg);
-    eglSwapBuffers(display, surface);
+    framebuffer_swap(fb);
     assert(glGetError() == GL_NO_ERROR);
   }
 
