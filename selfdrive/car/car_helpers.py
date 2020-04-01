@@ -110,11 +110,11 @@ def fingerprint(logcan, sendcan, has_relay):
 
     frame += 1
 
-  print("fingerprinted %s", car_fingerprint)
-  car_fingerprint = "OLD_CARS"
-  print("jk, fingerprinted %s", car_fingerprint)
-  print("yolo swaggins bilbo baggins")
-  print(car_fingerprint, " ", finger, " ", vin, " ", car_fw)
+  # print("fingerprinted %s", car_fingerprint)
+  # car_fingerprint = "OLD_CARS"
+  # print("jk, fingerprinted %s", car_fingerprint)
+  # print("yolo swaggins bilbo baggins")
+  # print(car_fingerprint, " ", finger, " ", vin, " ", car_fw)
   return car_fingerprint, finger, vin, car_fw
 
 
